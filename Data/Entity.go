@@ -1,7 +1,6 @@
 package Data
 
 import (
-	"math/rand"
 	"sync"
 )
 
@@ -35,16 +34,8 @@ type Entity struct {
 	mutex         sync.Mutex
 }
 
-func newEntity(world *World) *Entity {
-	entity := &Entity{}
-
-	var isFound bool
-	for !isFound {
-		entity.x = rand.Intn(world.width)
-		entity.y = rand.Intn(world.height)
-
-		isFound = world.maze[entity.x][entity.y]
-	}
+func NewEntity(entityType EntityType) *Entity {
+	entity := &Entity{entityType: entityType}
 
 	return entity
 }
